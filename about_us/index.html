@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — Nullox</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../style.css"/>
+  <style>
+    .about-hero {
+      padding: 160px 24px 80px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .about-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .about-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+    }
+
+    .about-hero p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .about-hero p strong {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    /* ── MANIFESTO ── */
+    .manifesto {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      border-top: 1px solid var(--border);
+      padding-top: 60px;
+    }
+
+    .manifesto-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .manifesto-item {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 36px;
+      align-items: flex-start;
+    }
+
+    .manifesto-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      color: var(--dim);
+      padding-top: 4px;
+      flex-shrink: 0;
+      width: 24px;
+    }
+
+    .manifesto-text strong {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .manifesto-text p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── WHO ── */
+    .who-section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+      border-top: 1px solid var(--border);
+      padding-top: 60px;
+    }
+
+    .who-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .who-card {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 28px;
+    }
+
+    .who-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      background: linear-gradient(135deg, #FF6B0022, #BF00FF22);
+      color: var(--text);
+    }
+
+    .who-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.92rem;
+      margin-bottom: 4px;
+    }
+
+    .who-role {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .who-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── CTA ── */
+    .about-cta {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      padding-top: 60px;
+    }
+
+    .about-cta h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .about-cta .btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">NULLVOX</a>
+  <div class="nav-links">
+    <a href="/about_us" class="active">About</a>
+    <a href="/tg">Telegram</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="about-hero">
+  <p class="about-eyebrow">About us</p>
+  <h1>We think the music industry<br/><span class="grad-text">broke something.</span></h1>
+  <p>
+    Streaming exists for <strong>30 years</strong> and artists still get fractions of a cent per play.
+    Distributors take their cut. Labels take theirs. By the time money reaches the person
+    who actually made the music — there's almost nothing left.
+  </p>
+  <p>
+    Nullox was built to fix that. <strong>Direct deals, transparent royalties, no middlemen.</strong>
+    Every dollar from your subscription goes further toward the people who deserve it.
+  </p>
+  <p>
+    We're a small team from Kazakhstan, building something we wish existed.
+    Still in development — but we're already working with artists.
+  </p>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <p class="manifesto-title">What we believe</p>
+
+  <div class="manifesto-item">
+    <span class="manifesto-num">01</span>
+    <div class="manifesto-text">
+      <strong>Artists should be paid fairly</strong>
+      <p>Our PP10KL system pays $15–$85 per 10,000 streams depending on the artist's audience. That's up to 2× what Spotify pays — without a distributor taking 15–30% first.</p>
+    </div>
+  </div>
+
+  <div class="manifesto-item">
+    <span class="manifesto-num">02</span>
+    <div class="manifesto-text">
+      <strong>Discovery should be honest</strong>
+      <p>No paid placement. No algorithmic manipulation by labels. My Flow recommends music based on what you actually listen to — 15 mood vectors, built from real listening behavior.</p>
+    </div>
+  </div>
+
+  <div class="manifesto-item">
+    <span class="manifesto-num">03</span>
+    <div class="manifesto-text">
+      <strong>Streaming should be affordable</strong>
+      <p>$2.9/month. Less than any major platform. Because access to music shouldn't be a luxury.</p>
+    </div>
+  </div>
+
+  <div class="manifesto-item">
+    <span class="manifesto-num">04</span>
+    <div class="manifesto-text">
+      <strong>Independent music deserves a home</strong>
+      <p>No label required to upload. No distributor needed. You submit, we review, and if your music fits — you're in.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="who-section">
+  <p class="who-title">Who we are</p>
+
+  <div class="who-card">
+    <div class="who-avatar">F</div>
+    <div>
+      <div class="who-name">Founder & Developer</div>
+      <div class="who-role">Kazakhstan · Building Nullvox solo</div>
+      <div class="who-desc">Android developer, musician, and mod maker. Started Nullvox because every streaming platform felt like it was built for the platform, not the artist or the listener.</div>
+    </div>
+  </div>
+
+  <div class="who-card">
+    <div class="who-avatar">+</div>
+    <div>
+      <div class="who-name">We're growing</div>
+      <div class="who-role">Moderators · Elder Moderators · Supporters</div>
+      <div class="who-desc">The team is small right now. If you want to be part of something being built from scratch — follow our Telegram and stay close.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="about-cta">
+  <h2>Want to be part of this<br/><span class="grad-text">from day one?</span></h2>
+  <div class="btns">
+    <a class="btn btn-grad" href="/">Get notified</a>
+    <a class="btn btn-ghost" href="/tg">Join Telegram</a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">NULLVOX</span>
+  <div class="footer-links">
+    <a href="/about_us">About</a>
+    <a href="/tg">Telegram</a>
+  </div>
+  <span class="footer-copy">© 2026 Nullox</span>
+</footer>
+
+</body>
+</html>
+l>
