@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Request — Nullox</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../style.css"/>
+  <style>
+    .page-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 140px 24px 100px;
+    }
+
+    .eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .page-wrap h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .page-wrap .subtitle {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Form */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    input[type="email"],
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      padding: 13px 16px;
+      border-radius: 7px;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: rgba(191,0,255,0.4);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: var(--muted);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a5a72' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    select option {
+      background: #12121a;
+      color: #e2e2ee;
+    }
+
+    .request-types {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .request-type {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .request-type:hover {
+      border-color: rgba(191,0,255,0.25);
+    }
+
+    .request-type input[type="radio"] {
+      width: auto;
+      padding: 0;
+      border: none;
+      background: none;
+      margin-top: 2px;
+      accent-color: #BF00FF;
+      flex-shrink: 0;
+    }
+
+    .request-type-label {
+      font-size: 0.82rem;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .request-type-desc {
+      font-size: 0.73rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .request-type.selected {
+      border-color: rgba(191,0,255,0.45);
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #FF6B00, #BF00FF);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 15px;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .submit-btn:active { transform: translateY(0); }
+
+    .form-note {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 16px;
+      line-height: 1.6;
+    }
+
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 60px 0;
+    }
+
+    .success-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 20px;
+    }
+
+    .success-state h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 300;
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+
+    .success-state p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* info cards */
+    .info-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .info-card-title {
+      font-size: 0.78rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .info-card-desc {
+      font-size: 0.73rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 520px) {
+      .request-types { grid-template-columns: 1fr; }
+      .info-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/site/">NULLOX</a>
+  <div class="nav-links">
+    <a href="/site/about_us">About</a>
+    <a href="/site/tg">Telegram</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <p class="eyebrow">Privacy</p>
+  <h1>Data Request</h1>
+  <p class="subtitle">
+    You have the right to access, correct, or delete your personal data.
+    Fill out the form below and we will respond within 30 days.
+  </p>
+
+  <div class="info-cards">
+    <div class="info-card">
+      <div class="info-card-title">Access</div>
+      <div class="info-card-desc">Get a copy of all data we hold about you</div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">Correct</div>
+      <div class="info-card-desc">Fix inaccurate or incomplete information</div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">Delete</div>
+      <div class="info-card-desc">Request removal of your personal data</div>
+    </div>
+  </div>
+
+  <div id="requestForm">
+    <div class="form-group">
+      <label>Request type</label>
+      <div class="request-types">
+        <label class="request-type" id="type-access">
+          <input type="radio" name="requestType" value="access" onchange="selectType(this)"/>
+          <div>
+            <div class="request-type-label">Access my data</div>
+            <div class="request-type-desc">Download everything we know about you</div>
+          </div>
+        </label>
+        <label class="request-type" id="type-correct">
+          <input type="radio" name="requestType" value="correct" onchange="selectType(this)"/>
+          <div>
+            <div class="request-type-label">Correct my data</div>
+            <div class="request-type-desc">Fix incorrect information</div>
+          </div>
+        </label>
+        <label class="request-type" id="type-delete">
+          <input type="radio" name="requestType" value="delete" onchange="selectType(this)"/>
+          <div>
+            <div class="request-type-label">Delete my data</div>
+            <div class="request-type-desc">Remove your account and all data</div>
+          </div>
+        </label>
+        <label class="request-type" id="type-other">
+          <input type="radio" name="requestType" value="other" onchange="selectType(this)"/>
+          <div>
+            <div class="request-type-label">Other</div>
+            <div class="request-type-desc">Any other privacy-related request</div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email address linked to your account</label>
+      <input type="email" id="email" placeholder="your@email.com"/>
+    </div>
+
+    <div class="form-group">
+      <label for="details">Details (optional)</label>
+      <textarea id="details" placeholder="Describe your request in more detail..."></textarea>
+    </div>
+
+    <button class="submit-btn" onclick="handleSubmit()">Submit Request</button>
+
+    <p class="form-note">
+      We will verify your identity before processing any request.
+      Responses are sent to the email address provided within 30 days.
+      For urgent requests contact us directly at
+      <a href="mailto:nullox.org@gmail.com" style="color:#7B8CDE;">nullox.org@gmail.com</a>
+    </p>
+  </div>
+
+  <div class="success-state" id="successState">
+    <svg class="success-icon" viewBox="0 0 48 48" fill="none">
+      <circle cx="24" cy="24" r="23" stroke="url(#sg)" stroke-width="1.5"/>
+      <path d="M14 24l7 7 13-13" stroke="url(#sg)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <defs>
+        <linearGradient id="sg" x1="0" y1="0" x2="48" y2="0" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#FF6B00"/>
+          <stop offset="1" stop-color="#BF00FF"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <h2>Request submitted</h2>
+    <p>We received your request and will respond to <span id="confirmedEmail"></span> within 30 days.</p>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-logo">NULLOX</span>
+  <div class="footer-links">
+    <a href="/site/about_us">About</a>
+    <a href="/site/tg">Telegram</a>
+  </div>
+  <span class="footer-copy">© 2026 Nullox</span>
+</footer>
+
+<script>
+  function selectType(radio) {
+    document.querySelectorAll('.request-type').forEach(el => el.classList.remove('selected'));
+    radio.closest('.request-type').classList.add('selected');
+  }
+
+  function handleSubmit() {
+    const email = document.getElementById('email').value.trim();
+    const type = document.querySelector('input[name="requestType"]:checked');
+
+    if (!email || !email.includes('@')) {
+      document.getElementById('email').style.borderColor = 'rgba(255,60,60,0.5)';
+      setTimeout(() => document.getElementById('email').style.borderColor = '', 1500);
+      return;
+    }
+
+    if (!type) {
+      document.querySelectorAll('.request-type').forEach(el => {
+        el.style.borderColor = 'rgba(255,60,60,0.3)';
+      });
+      setTimeout(() => document.querySelectorAll('.request-type').forEach(el => el.style.borderColor = ''), 1500);
+      return;
+    }
+
+    // здесь подключишь backend или Formspree
+    const details = document.getElementById('details').value;
+    console.log('Data request:', { type: type.value, email, details });
+
+    document.getElementById('requestForm').style.display = 'none';
+    document.getElementById('confirmedEmail').textContent = email;
+    document.getElementById('successState').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
